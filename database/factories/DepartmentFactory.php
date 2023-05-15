@@ -4,18 +4,16 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Asignature;
-use App\Models\Section;
-use App\Models\Semester;
+use App\Models\Department;
 
-class SectionFactory extends Factory
+class DepartmentFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Section::class;
+    protected $model = Department::class;
 
     /**
      * Define the model's default state.
@@ -23,8 +21,6 @@ class SectionFactory extends Factory
     public function definition(): array
     {
         return [
-            'semester_id' => Semester::factory(),
-            'asignature_id' => Asignature::factory(),
             'name' => $this->faker->name,
         ];
     }

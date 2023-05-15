@@ -17,44 +17,59 @@ class AsignatureSeeder extends Seeder
     public function run(): void
     {
 
-        $luis_marcou        = Professor::whereName('LUIS MARCOU')->first()->id;
-        $maria_lovera       = Professor::whereName('MARIA LOVERA')->first()->id;
-        $maritza_martinez   = Professor::whereName('MARITZA MARTINEZ')->first()->id;
-        $tibisay_serrada    = Professor::whereName('TIBISAY SERRADA')->first()->id;
-        $samuel_perez       = Professor::whereName('SAMUEL PEREZ')->first()->id;
-        $carlos_blank       = Professor::whereName('CARLOS BLANK')->first()->id;
-        $benjamin_martinez  = Professor::whereName('BENJAMIN MARTINEZ')->first()->id;
-        $diego_larrique     = Professor::whereName('DIEGO LARRIQUE')->first()->id;
-        $humberto_daza      = Professor::whereName('HUMBERTO DAZA')->first()->id;
-        $javier_seoane      = Professor::whereName('JAVIER SEOANE')->first()->id;
-        $enrique_rey        = Professor::whereName('ENRIQUE REY')->first()->id;
-        $alexander_campo    = Professor::whereName('ALEXANDER CAMPO')->first()->id;
-        $wilmer_tellez      = Professor::whereName('WILMER TELLEZ')->first()->id;
-        $veronica_zarraga   = Professor::whereName('VERONICA ZARRAGA')->first()->id;
-        $erly_ruiz          = Professor::whereName('ERLY RUIZ')->first()->id;
-        $miguel_lovera      = Professor::whereName('MIGUEL ANGEL LOVERA')->first()->id;
-        $miguel_contreras   = Professor::whereName('MIGUEL A. CONTRERAS')->first()->id;
-        $xiomara_martinez   = Professor::whereName('XIOMARA MARTINEZ')->first()->id;
-        $xiomara_quilarque  = Professor::whereName('XIOMARA QUILARQUE')->first()->id;
-        $edixela_burgos     = Professor::whereName('EDIXELA BURGOS')->first()->id;
-        $jessie_blanco      = Professor::whereName('JESSIE BLANCO')->first()->id;
-        $maria_hernandez    = Professor::whereName('MARIA HERNANDEZ')->first()->id;
-        $javier_biardieu    = Professor::whereName('JAVIER BIARDIEU')->first()->id;
-        $carlos_agelvis     = Professor::whereName('CARLOS AGELVIS')->first()->id;
-        $rosalgel_alvarez   = Professor::whereName('ROSALGEL ALVAREZ')->first()->id;
-        $jose_hernandez     = Professor::whereName('JOSE JULIAN HERNANDEZ')->first()->id;
-        $carintia_leydenz   = Professor::whereName('CARINTIA LEYDENZ')->first()->id;
-        $brenda_yepez       = Professor::whereName('BRENDA YEPEZ')->first()->id;
-        $edmundo_pardo      = Professor::whereName('EDMUNDO PARDO')->first()->id;
-        $jose_lopez         = Professor::whereName('JOSE R. LOPEZ')->first()->id;
-        $antonio_paredes    = Professor::whereName('ANTONIO PAREDES')->first()->id;
-        $flerida_de_rengifo = Professor::whereName('FLERIDA DE RENGIFO')->first()->id;
-        $gloria_marreo      = Professor::whereName('GLORIA MARRERO')->first()->id;
-        $xavier_valente     = Professor::whereName('XAVIER VALENTE')->first()->id;
-        $jean_marquez       = Professor::whereName('JEAN MARQUEZ')->first()->id;
-        $carlos_viso        = Professor::whereName('CARLOS VISO')->first()->id;
-        $maurio_phelan      = Professor::whereName('MAURICIO PHELAN')->first()->id;
-        $elsa_rodriguez     = Professor::whereName('ELSA RODRIGUEZ')->first()->id;
+        $antonio_suarez = Professor::where('name', '=', 'ANTONIO SUAREZ')->first()->id;
+        $erly_ruiz = Professor::where('name', '=', 'ERLY RUIZ')->first()->id;
+        $jose_tapia = Professor::where('name', '=', 'JOSE TAPIA')->first()->id;
+        $enrique_rey = Professor::where('name', '=', 'ENRIQUE REY')->first()->id;
+        $livia_vargas = Professor::where('name', '=', 'LIVIA VARGAS')->first()->id;
+        $tania_delgado = Professor::where('name', '=', 'TANIA DELGADO')->first()->id;
+        $benjamin_martinez = Professor::where('name', '=', 'BENJAMIN MARTINEZ')->first()->id;
+        $elide_hernandez = Professor::where('name', '=', 'ELIDE HERNANDEZ')->first()->id;
+        $richard_escorche = Professor::where('name', '=', 'RICHARD ESCORCHE')->first()->id;
+        $chelina_sepulveda = Professor::where('name', '=', 'CHELINA SUPULVEDA')->first()->id;
+        $alexander_campos = Professor::where('name', '=', 'ALEXANDER CAMPOS')->first()->id;
+        $joshua_gonzalez = Professor::where('name', '=', 'JOSHUA GONZALEZ')->first()->id;
+        $veronica_zarraga = Professor::where('name', '=', 'VERONICA ZARRAGA')->first()->id;
+        $reina_sarmiento = Professor::where('name', '=', 'REINA SARMIENTO')->first()->id;
+        $carynthia_leydenz = Professor::where('name', '=', 'CARYNTHIA LEYDENZ')->first()->id;
+        $edmundo_pardo = Professor::where('name', '=', 'EDMUNDO PARDO')->first()->id;
+        $jose_moreno = Professor::where('name', '=', 'JOSE MORENO')->first()->id;
+        $jose_lopez = Professor::where('name', '=', 'JOSE LOPEZ')->first()->id;
+        $samuel_perez = Professor::where('name', '=', 'SAMUEL PEREZ')->first()->id;
+        $maritza_martinez = Professor::where('name', '=', 'MARITZA MARTINEZ')->first()->id;
+        $maria_lovera = Professor::where('name', '=', 'MARIA LOVERA')->first()->id;
+        $carlos_viso = Professor::where('name', '=', 'CARLOS VISO')->first()->id;
+        $luis_marcou = Professor::where('name', '=', 'LUIS MARCOU')->first()->id;
+        $carlos_sanvicente = Professor::where('name', '=', 'CARLOS SANVICENTE')->first()->id;
+        $javier_diardieu = Professor::where('name', '=', 'JAVIER BIARDIEU')->first()->id;
+        $gabriel_salazar = Professor::where('name', '=', 'GABRIEL SALAZAR')->first()->id;
+        $carlos_agelvis = Professor::where('name', '=', 'CARLOS AGELVIS')->first()->id;
+        $rosangel_alvarez = Professor::where('name', '=', 'ROSANGEL ALVAREZ')->first()->id;
+        $miguel_denis = Professor::where('name', '=', 'MIGUEL DENIS')->first()->id;
+        $elisa_graterol = Professor::where('name', '=', 'ELISA GRATEROL')->first()->id;
+        $jean_marquez = Professor::where('name', '=', 'JEAN MARQUEZ')->first()->id;
+        $elsa_rodriguez = Professor::where('name', '=', 'ELSA RODRIGUEZ')->first()->id;
+        $edixela_burgos = Professor::where('name', '=', 'EDIXELA BURGOS')->first()->id;
+        $oly_millan = Professor::where('name', '=', 'OLY MILLAN')->first()->id;
+        $ricardo_marcano = Professor::where('name', '=', 'RICARDO MARCANO')->first()->id;
+        $eleazar_mujica = Professor::where('name', '=', 'ELEAZAR MUJICA')->first()->id;
+        $irama_larosa = Professor::where('name', '=', 'IRAMA LAROSA')->first()->id;
+        $xavier_valente = Professor::where('name', '=', 'XAVIER VALENTE')->first()->id;
+        $brenda_yepez = Professor::where('name', '=', 'BRENDA YEPEZ')->first()->id;
+        $ignacio_avalos = Professor::where('name', '=', 'IGNACIO AVALOS')->first()->id;
+        $elizabeth_zamora = Professor::where('name', '=', 'ELIZABETH ZAMORA')->first()->id;
+        $zaida_liendo = Professor::where('name', '=', 'ZAIDA LIENDO')->first()->id;
+        $xiomara_martinez = Professor::where('name', '=', 'XIOMARA MARTINEZ')->first()->id;
+        $mauricio_phelan = Professor::where('name', '=', 'MAURICIO PHELAN')->first()->id;
+        $miguel_contreras = Professor::where('name', '=', 'MIGUEL CONTRERAS')->first()->id;
+        $jennifer_zapata = Professor::where('name', '=', 'JENNIFER ZAPATA')->first()->id;
+        $antonio_paredes = Professor::where('name', '=', 'ANTONIO PAREDES')->first()->id;
+        $emilio_osorio = Professor::where('name', '=', 'EMILIO OSORIO')->first()->id;
+        $daisy_damario = Professor::where('name', '=', 'DAISY DAMARIO')->first()->id;
+        $xiomara_quilarque = Professor::where('name', '=', 'XIOMARA QUILARQUE')->first()->id;
+        $flerida_rengifo = Professor::where('name', '=', 'FLERIDA RENGIFO')->first()->id;
+        $jose_hernandez = Professor::where('name', '=', 'JOSE HERNANDEZ')->first()->id;
+        $humberto_daza = Professor::where('name', '=', 'HUMBERTO DAZA')->first()->id;
 
 
         Asignature::create([
@@ -67,21 +82,21 @@ class AsignatureSeeder extends Seeder
         Asignature::create([
             'code'         => '9403',
             'name'         => 'INTRODUCCION A LA ESTADISTICA',
-            'professor_id' => $carintia_leydenz,
+            'professor_id' => $carynthia_leydenz,
             'is_active'    => true,
             'type'         => 'M',
         ]);
         Asignature::create([
             'code'         => '9611',
             'name'         => 'TALLER DE METODOS I',
-            'professor_id' => $veronica_zarraga,
+            'professor_id' => $elide_hernandez,
             'is_active'    => true,
             'type'         => 'M',
         ]);
         Asignature::create([
             'code'         => '9212',
             'name'         => 'ECONOMIA POLITICA I',
-            'professor_id' => $enrique_rey,
+            'professor_id' => $oly_millan,
             'is_active'    => true,
             'type'         => 'M',
         ]);
@@ -102,28 +117,28 @@ class AsignatureSeeder extends Seeder
         Asignature::create([
             'code'         => '9612',
             'name'         => 'TALLER DE METODOS II',
-            'professor_id' => $wilmer_tellez,
+            'professor_id' => $chelina_sepulveda,
             'is_active'    => true,
             'type'         => 'M',
         ]);
         Asignature::create([
             'code'         => '9213',
             'name'         => 'ECONOMIA POLITICA II',
-            'professor_id' => $enrique_rey,
+            'professor_id' => $eleazar_mujica,
             'is_active'    => true,
             'type'         => 'M',
         ]);
         Asignature::create([
             'code'         => '9812',
             'name'         => 'TEORIA SOCIAL II',
-            'professor_id' => $miguel_contreras,
+            'professor_id' => $jose_tapia,
             'is_active'    => true,
             'type'         => 'M',
         ]);
         Asignature::create([
             'code'         => '9405',
             'name'         => 'INFERENCIA ESTADISTICA',
-            'professor_id' => $jose_lopez,
+            'professor_id' => $jose_moreno,
             'is_active'    => true,
             'type'         => 'M',
         ]);
@@ -136,8 +151,8 @@ class AsignatureSeeder extends Seeder
         ]);
         Asignature::create([
             'code'         => '9613',
-            'name'         => 'TALLER DE METODOS II',
-            'professor_id' => $alexander_campo,
+            'name'         => 'TALLER DE METODOS III',
+            'professor_id' => $alexander_campos,
             'is_active'    => true,
             'type'         => 'M',
         ]);
@@ -145,13 +160,6 @@ class AsignatureSeeder extends Seeder
             'code'         => '9700',
             'name'         => 'PSICOLOGIA',
             'professor_id' => $jean_marquez,
-            'is_active'    => true,
-            'type'         => 'M',
-        ]);
-        Asignature::create([
-            'code'         => '9210',
-            'name'         => 'TEORIA POLITICA',
-            'professor_id' => $tibisay_serrada,
             'is_active'    => true,
             'type'         => 'M',
         ]);
@@ -165,14 +173,14 @@ class AsignatureSeeder extends Seeder
         Asignature::create([
             'code'         => '9813',
             'name'         => 'TEORIA SOCIAL III',
-            'professor_id' => $carlos_viso,
+            'professor_id' => $enrique_rey,
             'is_active'    => true,
             'type'         => 'M',
         ]);
         Asignature::create([
             'code'         => '9614',
             'name'         => 'TALLER DE METODOS CUANTITATIVOS',
-            'professor_id' => $maurio_phelan,
+            'professor_id' => $joshua_gonzalez,
             'is_active'    => true,
             'type'         => 'M',
         ]);
@@ -186,7 +194,7 @@ class AsignatureSeeder extends Seeder
         Asignature::create([
             'code'         => '9814',
             'name'         => 'TEORIA SOCIAL IV',
-            'professor_id' => $erly_ruiz,
+            'professor_id' => $livia_vargas,
             'is_active'    => true,
             'type'         => 'M',
         ]);

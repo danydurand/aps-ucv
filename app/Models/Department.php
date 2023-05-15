@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Semester extends Model
+class Department extends Model
 {
     use HasFactory;
 
@@ -16,8 +16,6 @@ class Semester extends Model
      */
     protected $fillable = [
         'name',
-        'start_date',
-        'end_date',
     ];
 
     /**
@@ -27,7 +25,5 @@ class Semester extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'start_date' => 'date',
-        'end_date' => 'date',
     ];
 }
