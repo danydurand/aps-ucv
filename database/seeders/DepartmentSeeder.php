@@ -20,6 +20,7 @@ class DepartmentSeeder extends Seeder
         Department::create([ 'name' => 'ESTUDIOS LATINOAMERICANOS']);
         Department::create([ 'name' => 'ESTUDIOS DE LA POBLACION Y AMBIENTE']);
         Department::create([ 'name' => 'ANALISIS HISTORICO SOCIAL']);
+        Department::create([ 'name' => 'ANALISIS ECONOMICO POLITICO Y DE LA PLANIFICACION']);
         Department::create([ 'name' => 'METODOS']);
         Department::create([ 'name' => 'TEORIA SOCIAL']);
     }
