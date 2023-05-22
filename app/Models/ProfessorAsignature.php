@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class AsignatureProfessor extends Model
+class ProfessorAsignature extends Model
 {
     use HasFactory;
 
@@ -16,8 +16,8 @@ class AsignatureProfessor extends Model
      * @var array
      */
     protected $fillable = [
-        'asignature_id',
         'profressor_id',
+        'asignature_id',
         'section',
     ];
 
@@ -27,9 +27,9 @@ class AsignatureProfessor extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
-        'asignature_id' => 'integer',
+        'id'            => 'integer',
         'profressor_id' => 'integer',
+        'asignature_id' => 'integer',
     ];
 
     public function asignature(): BelongsTo

@@ -114,9 +114,9 @@ class Asignature extends Model
 
 
 
-    public function professors(): BelongsToMany
+    public function professors(): BelongsTo
     {
-        return $this->belongsToMany(Professor::class);
+        return $this->belongsTo(Professor::class);
     }
     public function period(): BelongsTo
     {

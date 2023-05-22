@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Professor extends Model
 {
@@ -60,9 +61,9 @@ class Professor extends Model
     //----------------
     // Relationships
     //----------------
-    public function asignatures(): BelongsToMany
+    public function professor_asignatures(): HasMany
     {
-        return $this->belongsToMany(Asignature::class);
+        return $this->hasMany(ProfessorAsignature::class);
     }
 
     public function period(): BelongsTo

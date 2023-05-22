@@ -275,10 +275,10 @@ class AsignatureSeeder extends Seeder
         Asignature::create([
             'code'          => '9000',
             'name'          => 'TESIS',
-            'credits'       => 4,
+            'credits'       => 10,
             'semester'      => 'DECIMO',
             'period_id'     => $period,
-            'department_id' => $proc,
+            'department_id' => null,
             'type'          => 'OBLIGATORIA',
         ]);
     }

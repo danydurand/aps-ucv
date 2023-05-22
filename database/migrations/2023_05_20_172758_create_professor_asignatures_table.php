@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('asignature_professor', function (Blueprint $table) {
-            $table->foreignId('asignature_id')->constrained();
+        Schema::create('professor_asignatures', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('professor_id')->constrained();
+            $table->foreignId('asignature_id')->constrained();
+            $table->char('section',5);
+            $table->timestamps();
 
-            $table->index('asignature_id');
             $table->index('professor_id');
+            $table->index('asignature_id');
         });
 
         Schema::enableForeignKeyConstraints();
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('asignature_professor');
+        Schema::dropIfExists('professor_asignatures');
     }
 };

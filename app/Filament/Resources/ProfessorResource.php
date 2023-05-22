@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProfessorResource\Pages;
 use App\Filament\Resources\ProfessorResource\RelationManagers;
 use App\Filament\Resources\ProfessorResource\RelationManagers\AsignaturesRelationManager;
+use App\Filament\Resources\ProfessorResource\RelationManagers\ProfessorAsignaturesRelationManager;
 use App\Models\Asignature;
 use App\Models\Professor;
 use Filament\Forms;
@@ -49,12 +50,10 @@ class ProfessorResource extends Resource
                 Forms\Components\TextInput::make('phones')
                     ->tel()
                     ->maxLength(50),
-                Select::make('asignatures')
-                    ->columnSpan(3)
-                    ->multiple()
-                    ->relationship('asignatures', 'name'),
-                    // ->preload()
-                    // ->options(fn (Model $record) => Asignature::where('department_id', $record->department_id)->pluck('name', 'id')),
+                // Select::make('asignatures')
+                //     ->columnSpan(3)
+                //     ->multiple()
+                //     ->relationship('asignatures', 'name'),
                 Forms\Components\TextInput::make('comments')
                     ->columnSpan(3)
                     ->maxLength(250),
@@ -71,10 +70,15 @@ class ProfessorResource extends Resource
                 Tables\Columns\TextColumn::make('department.name')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('asignatures_count')
+                Tables\Columns\TextColumn::make('professor_asignatures_count')
                     ->label('Asignatures')
                     ->alignCenter()
-                    ->getStateUsing(fn (Model $record): int => $record->asignatures()->count()),
+                    ->sortable()
+                    ->counts('professor_asignatures'),
+                // Tables\Columns\TextColumn::make('asignatures_count')
+                //     ->label('Asignatures')
+                //     ->alignCenter()
+                //     ->getStateUsing(fn (Model $record): int => $record->asignatures()->count()),
                 Tables\Columns\TextColumn::make('email')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable()
@@ -115,6 +119,7 @@ class ProfessorResource extends Resource
     public static function getRelations(): array
     {
         return [
+            ProfessorAsignaturesRelationManager::class
             // AsignaturesRelationManager::class,
         ];
     }
