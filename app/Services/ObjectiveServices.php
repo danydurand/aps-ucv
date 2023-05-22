@@ -7,10 +7,10 @@ use App\Models\Objective;
 
 class ObjectiveServices
 {
-    public function UpdateObjectivesCount(Asignature $asignature, $semester_id)
+    public function UpdateObjectivesCount(Asignature $asignature, $period_id)
     {
         $count = Objective::whereAsignatureId($asignature->id)
-                        ->whereSemesterId($semester_id)
+                        ->wherePeriodId($period_id)
                         ->count();
         $asignature->update(['objectives_count' => $count]);
     }

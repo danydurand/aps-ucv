@@ -109,7 +109,7 @@ class ProfessorResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return static::getModel()::fromActiveSemester();
+        return static::getModel()::fromActivePeriod();
     }
 
     public static function getRelations(): array

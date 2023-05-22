@@ -44,6 +44,9 @@ class AsignatureResource extends Resource
                     ->label('Creditos')
                     ->required()
                     ->columnSpan(1),
+                Forms\Components\Select::make('semester')
+                    ->options(Asignature::SEMESTER_OPTIONS)
+                    ->required(),
                 Forms\Components\Select::make('department_id')
                     ->label('Departamento')
                     ->relationship('department', 'name')
@@ -87,19 +90,25 @@ class AsignatureResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->limit(22),
+                Tables\Columns\TextColumn::make('semester')
+                    ->label('Semestre')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('department.name')
                     ->label('Depto')
                     ->sortable()
                     ->searchable()
-                    ->limit(22),
+                    ->limit(18),
                 Tables\Columns\TextColumn::make('info_count')
                     ->label('Info')
                     ->alignCenter(),
                 Tables\Columns\TextColumn::make('objectives_count')
                     ->label('Objs')
                     ->alignCenter(),
-                Tables\Columns\TextColumn::make('type_name')
+                Tables\Columns\TextColumn::make('type')
                     ->label('Tipo')
+                    ->limit(4)
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('credits')
                     ->toggleable(isToggledHiddenByDefault: true)
@@ -115,6 +124,9 @@ class AsignatureResource extends Resource
             ->filters([
                 SelectFilter::make('Departamento')
                     ->relationship('department', 'name'),
+                SelectFilter::make('semester')
+                    ->label('Semestre')
+                    ->options(Asignature::SEMESTER_OPTIONS),
                 SelectFilter::make('type')
                     ->label('Tipo')
                     ->options(Asignature::TYPE_OPTIONS),
@@ -137,7 +149,7 @@ class AsignatureResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return static::getModel()::fromActiveSemester();
+        return static::getModel()::fromActivePeriod();
     }
 
     public static function getRelations(): array

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Period;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Department;
@@ -22,7 +23,8 @@ class ProfessorFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
+            'name'          => $this->faker->name,
+            'perior_id'     => Period::factory(),
             'department_id' => Department::factory(),
             'email' => $this->faker->safeEmail,
             'password' => $this->faker->password,

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('objectives', function (Blueprint $table) {
             $table->id();
             $table->foreignId('asignature_id')->constrained();
-            $table->foreignId('semester_id')->constrained();
+            $table->foreignId('period_id')->constrained();
             $table->decimal('order', 4, 2);
             $table->string('description',100);
             $table->boolean('is_active')->default(true);
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->index('asignature_id');
-            $table->index('semester_id');
+            $table->index('period_id');
             $table->index('is_active');
         });
 

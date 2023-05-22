@@ -19,7 +19,7 @@ class Objective extends Model
      */
     protected $fillable = [
         'asignature_id',
-        'semester_id',
+        'period_id',
         'order',
         'description',
         'content',
@@ -33,10 +33,10 @@ class Objective extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
+        'id'            => 'integer',
         'asignature_id' => 'integer',
-        'order' => 'decimal:2',
-        'is_active' => 'boolean',
+        'order'         => 'decimal:2',
+        'is_active'     => 'boolean',
     ];
 
     protected function description(): Attribute
@@ -62,8 +62,8 @@ class Objective extends Model
     {
         return $this->belongsTo(Asignature::class);
     }
-    public function semester(): BelongsTo
+    public function period(): BelongsTo
     {
-        return $this->belongsTo(Semester::class);
+        return $this->belongsTo(Period::class);
     }
 }

@@ -22,8 +22,10 @@ class ObjectiveFactory extends Factory
     public function definition(): array
     {
         $asignature = Asignature::inRandomOrder()->first()->id;
+        $asignature = Asignature::inRandomOrder()->first()->id;
         return [
             'asignature_id' => $asignature,
+            'period_id'     => $asignature,
             'order'         => $this->faker->randomFloat(2, 1, 4.99),
             'description'   => $this->faker->text,
             'content'       => $this->faker->paragraphs(1, true),

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('professors', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);
-            $table->foreignId('semester_id')->constrained();
+            $table->foreignId('period_id')->constrained();
             $table->foreignId('department_id')->constrained();
             $table->string('email', 100)->nullable();
             $table->string('password', 100)->nullable();
@@ -26,10 +26,10 @@ return new class extends Migration
             $table->string('comments', 250)->nullable();
             $table->timestamps();
 
-            $table->index('semester_id');
+            $table->index('period_id');
             $table->index('department_id');
             $table->index('is_active');
-            $table->unique(['name', 'semester_id']);
+            $table->unique(['name', 'period_id']);
         });
 
         Schema::enableForeignKeyConstraints();

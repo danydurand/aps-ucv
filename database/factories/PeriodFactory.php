@@ -4,16 +4,16 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Semester;
+use App\Models\Period;
 
-class SemesterFactory extends Factory
+class PeriodFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Semester::class;
+    protected $model = Period::class;
 
     /**
      * Define the model's default state.

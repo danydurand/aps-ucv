@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SemesterResource\Pages;
-use App\Filament\Resources\SemesterResource\RelationManagers;
-use App\Models\Semester;
+use App\Filament\Resources\PeriodResource\Pages;
+use App\Filament\Resources\PeriodResource\RelationManagers;
+use App\Models\Period;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -13,10 +13,11 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SemesterResource extends Resource
+class PeriodResource extends Resource
 {
-    protected static ?string $model = Semester::class;
-    protected static ?string $modelLabel = 'Semestre';
+    protected static ?string $model = Period::class;
+    protected static ?string $modelLabel = 'Periodo';
+    protected static ?string $modelPluralLabel = 'Periodos';
     protected static ?string $navigationIcon = 'heroicon-o-location-marker';
     protected static ?string $navigationGroup = 'gestion';
     protected static ?int $navigationSort = 0;
@@ -104,9 +105,9 @@ class SemesterResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSemesters::route('/'),
-            'create' => Pages\CreateSemester::route('/create'),
-            'edit' => Pages\EditSemester::route('/{record}/edit'),
+            'index' => Pages\ListPeriods::route('/'),
+            'create' => Pages\CreatePeriod::route('/create'),
+            'edit' => Pages\EditPeriod::route('/{record}/edit'),
         ];
     }
     protected static function getNavigationBadge(): ?string

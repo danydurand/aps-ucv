@@ -4,10 +4,10 @@ namespace App\Providers;
 
 use App\Models\Asignature;
 use App\Models\Objective;
-use App\Models\Semester;
+use App\Models\Period;
 use App\Observers\AsignatureObserver;
 use App\Observers\ObjectiveObserver;
-use App\Observers\SemesterObserver;
+use App\Observers\PeriodObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -31,7 +31,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Semester::observe(SemesterObserver::class);
+        Period::observe(PeriodObserver::class);
         Objective::observe(ObjectiveObserver::class);
         Asignature::observe(AsignatureObserver::class);
     }

@@ -18,7 +18,7 @@ class Professor extends Model
      */
     protected $fillable = [
         'name',
-        'semester_id',
+        'period_id',
         'department_id',
         'email',
         'password',
@@ -51,10 +51,10 @@ class Professor extends Model
     //---------
     // Scopes
     //---------
-    public function scopeFromActiveSemester($query)
+    public function scopeFromActivePeriod($query)
     {
-        $seme = Semester::getActiveOne()->id;
-        return $query->where('semester_id', $seme);
+        $seme = Period::getActiveOne()->id;
+        return $query->where('period_id', $seme);
     }
 
     //----------------
@@ -65,9 +65,9 @@ class Professor extends Model
         return $this->belongsToMany(Asignature::class);
     }
 
-    public function semester(): BelongsTo
+    public function period(): BelongsTo
     {
-        return $this->belongsTo(Semester::class);
+        return $this->belongsTo(Period::class);
     }
 
     public function department(): BelongsTo

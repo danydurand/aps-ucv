@@ -17,10 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('code', 10);
             $table->string('name', 150);
+            $table->string('semester', 20);
             $table->integer('credits');
-            $table->foreignId('semester_id')->constrained();
-            $table->foreignId('department_id')->constrained();
-            $table->char('type', 1);
+            $table->foreignId('period_id')->constrained();
+            $table->foreignId('department_id')->nullable()->constrained();
+            $table->string('type', 20);
             $table->text('presentation')->nullable();
             $table->text('general_objective')->nullable();
             $table->text('themes')->nullable();
@@ -29,9 +30,9 @@ return new class extends Migration
             $table->smallInteger('objectives_count')->default(0);
             $table->timestamps();
 
-            $table->index('semester_id');
+            $table->index('period_id');
             $table->index('department_id');
-            $table->unique(['code', 'semester_id']);
+            $table->unique(['code', 'period_id']);
         });
 
         Schema::enableForeignKeyConstraints();

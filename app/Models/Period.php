@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Semester extends Model
+class Period extends Model
 {
     use HasFactory;
 
@@ -37,7 +37,7 @@ class Semester extends Model
 
     public static function getActiveOne()
     {
-        return Semester::where('is_active', true)->first();
+        return Period::where('is_active', true)->first();
     }
 
 

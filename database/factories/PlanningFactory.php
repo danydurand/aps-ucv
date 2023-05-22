@@ -8,7 +8,7 @@ use App\Models\Asignature;
 use App\Models\Objective;
 use App\Models\Planning;
 use App\Models\Professor;
-use App\Models\Semester;
+use App\Models\Period;
 
 class PlanningFactory extends Factory
 {
@@ -25,7 +25,7 @@ class PlanningFactory extends Factory
     public function definition(): array
     {
         return [
-            'semester_id'    => Semester::factory(),
+            'period_id'      => Period::factory(),
             'asignature_id'  => Asignature::factory(),
             'professor_id'   => Professor::factory(),
             'objective_id'   => Objective::factory(),

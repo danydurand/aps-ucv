@@ -23,7 +23,7 @@ class Asignature extends Model
         'code',
         'name',
         'credits',
-        'semester_id',
+        'period_id',
         'department_id',
         'type',
         'presentation',
@@ -46,17 +46,30 @@ class Asignature extends Model
     ];
 
     const TYPE_OPTIONS = [
-        'M' => 'OBLIGATORIA',
-        'O' => 'OPTATIVA'
+        'OBLIGATORIA' => 'OBLIGATORIA',
+        'OPTATIVA'    => 'OPTATIVA'
+    ];
+
+    const SEMESTER_OPTIONS = [
+        'PRIMERO' => 'PRIMERO',
+        'SEGUNDO' => 'SEGUNDO',
+        'TERCERO' => 'TERCERO',
+        'CUARTO'  => 'CUARTO',
+        'QUINTO'  => 'QUINTO',
+        'SEXTO'   => 'SEXTO',
+        'SEPTIMO' => 'SEPTIMO',
+        'OCTAVO'  => 'OCTAVO',
+        'NOVENO'  => 'NOVENO',
+        'DECIMO'  => 'DECIMO',
     ];
 
     //---------
     // Scopes
     //---------
-    public function scopeFromActiveSemester($query)
+    public function scopeFromActivePeriod($query)
     {
-        $seme = Semester::getActiveOne()->id;
-        return $query->where('semester_id', $seme);
+        $seme = Period::getActiveOne()->id;
+        return $query->where('period_id', $seme);
     }
 
     //-------------
@@ -105,9 +118,9 @@ class Asignature extends Model
     {
         return $this->belongsToMany(Professor::class);
     }
-    public function semester(): BelongsTo
+    public function period(): BelongsTo
     {
-        return $this->belongsTo(Semester::class);
+        return $this->belongsTo(Period::class);
     }
     public function department(): BelongsTo
     {

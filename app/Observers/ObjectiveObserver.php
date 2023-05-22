@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Objective;
-use App\Models\Semester;
+use App\Models\Period;
 use App\Services\ObjectiveServices;
 
 class ObjectiveObserver
@@ -18,14 +18,14 @@ class ObjectiveObserver
 
     public function creating(Objective $objective): void
     {
-        $objective->semester_id = Semester::getActiveOne()->id;
+        $objective->period_id = Period::getActiveOne()->id;
     }
     /**
      * Handle the Objective "created" event.
      */
     public function created(Objective $objective): void
     {
-        $this->service->UpdateObjectivesCount($objective->asignature, $objective->semester_id);
+        $this->service->UpdateObjectivesCount($objective->asignature, $objective->period_id);
         // $objective->asignature->increment('objectives_count');
     }
 
@@ -42,8 +42,7 @@ class ObjectiveObserver
      */
     public function deleted(Objective $objective): void
     {
-        $this->service->UpdateObjectivesCount($objective->asignature, $objective->semester_id);
-        // $objective->asignature->decrement('objectives_count');
+        $this->service->UpdateObjectivesCount($objective->asignature, $objective->period_id);
     }
 
     /**
