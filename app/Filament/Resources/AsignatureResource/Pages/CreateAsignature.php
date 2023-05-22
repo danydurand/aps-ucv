@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateAsignature extends CreateRecord
 {
     protected static string $resource = AsignatureResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

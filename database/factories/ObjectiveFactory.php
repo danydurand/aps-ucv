@@ -21,13 +21,14 @@ class ObjectiveFactory extends Factory
      */
     public function definition(): array
     {
+        $asignature = Asignature::inRandomOrder()->first()->id;
         return [
-            'asignature_id' => Asignature::factory(),
-            'order' => $this->faker->randomFloat(2, 0, .99),
-            'description' => $this->faker->text,
-            'content' => $this->faker->paragraphs(3, true),
-            'is_active' => $this->faker->boolean,
-            'books' => $this->faker->regexify('[A-Za-z0-9]{250}'),
+            'asignature_id' => $asignature,
+            'order'         => $this->faker->randomFloat(2, 1, 4.99),
+            'description'   => $this->faker->text,
+            'content'       => $this->faker->paragraphs(1, true),
+            'is_active'     => true,
+            'books'         => $this->faker->regexify('[A-Z0-9]{50}'),
         ];
     }
 }

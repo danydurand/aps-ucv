@@ -12,6 +12,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -20,8 +21,9 @@ class AsignatureResource extends Resource
 {
     protected static ?string $model = Asignature::class;
     protected static ?string $modelLabel = 'Materia';
-
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationGroup = 'gestion';
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -80,18 +82,25 @@ class AsignatureResource extends Resource
                     ->label('Codigo')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('short_name')
+                Tables\Columns\TextColumn::make('name')
                     ->label('Nombre')
                     ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('department.short_name')
+                    ->searchable()
+                    ->limit(22),
+                Tables\Columns\TextColumn::make('department.name')
                     ->label('Depto')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->limit(22),
+                Tables\Columns\TextColumn::make('info_count')
+                    ->label('Info')
+                    ->alignCenter(),
+                Tables\Columns\TextColumn::make('objectives_count')
+                    ->label('Objs')
+                    ->alignCenter(),
                 Tables\Columns\TextColumn::make('type_name')
                     ->label('Tipo')
-                    ->sortable()
-                    ->searchable(),
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('credits')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable()
@@ -102,13 +111,21 @@ class AsignatureResource extends Resource
                 Tables\Columns\TextColumn::make('updated_at')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->dateTime('Y-m-d'),
-            ])
+            ])->defaultSort('id')
             ->filters([
-                SelectFilter::make('Dpto')
+                SelectFilter::make('Departamento')
                     ->relationship('department', 'name'),
                 SelectFilter::make('type')
                     ->label('Tipo')
                     ->options(Asignature::TYPE_OPTIONS),
+                Filter::make('sin_obj_gral')
+                    ->label('Sin Obj Gral')
+                    ->query(fn (Builder $query): Builder => $query->where('info_count', '0/2'))
+                    ->toggle(),
+                Filter::make('sin_obj_esp')
+                    ->label('Sin Obj Esp.')
+                    ->query(fn (Builder $query): Builder => $query->where('objectives_count', 0))
+                    ->toggle(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -116,6 +133,11 @@ class AsignatureResource extends Resource
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return static::getModel()::fromActiveSemester();
     }
 
     public static function getRelations(): array

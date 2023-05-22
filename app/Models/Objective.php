@@ -19,6 +19,7 @@ class Objective extends Model
      */
     protected $fillable = [
         'asignature_id',
+        'semester_id',
         'order',
         'description',
         'content',
@@ -60,5 +61,9 @@ class Objective extends Model
     public function asignature(): BelongsTo
     {
         return $this->belongsTo(Asignature::class);
+    }
+    public function semester(): BelongsTo
+    {
+        return $this->belongsTo(Semester::class);
     }
 }

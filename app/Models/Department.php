@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Department extends Model
@@ -44,6 +45,17 @@ class Department extends Model
             set: fn ($value) => Str::upper($value)
         );
     }
+
+    public function professors(): HasMany
+    {
+        return $this->hasMany(Professor::class);
+    }
+
+    public function asignatures(): HasMany
+    {
+        return $this->hasMany(Asignature::class);
+    }
+
 
 
 

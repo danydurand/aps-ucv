@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\DepartmentResource\Pages;
+namespace App\Filament\Resources\SemesterResource\Pages;
 
-use App\Filament\Resources\DepartmentResource;
+use App\Filament\Resources\SemesterResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditDepartment extends EditRecord
+class EditSemester extends EditRecord
 {
-    protected static string $resource = DepartmentResource::class;
+    protected static string $resource = SemesterResource::class;
 
     protected function getRedirectUrl(): string
     {

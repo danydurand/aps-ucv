@@ -52,6 +52,7 @@ class ObjectivesRelationManager extends RelationManager
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('semester.name')
             ])->defaultSort('order')
             ->filters([
                 //

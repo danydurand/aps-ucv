@@ -13,25 +13,23 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('asignatures', function (Blueprint $table) {
+        Schema::create('professors', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 10);
-            $table->string('name', 150);
-            $table->integer('credits');
+            $table->string('name', 50);
             $table->foreignId('semester_id')->constrained();
             $table->foreignId('department_id')->constrained();
-            $table->char('type', 1);
-            $table->text('presentation')->nullable();
-            $table->text('general_objective')->nullable();
-            $table->text('themes')->nullable();
-            $table->text('purpose')->nullable();
-            $table->string('info_count', 10)->nullable();
-            $table->smallInteger('objectives_count')->default(0);
+            $table->string('email', 100)->nullable();
+            $table->string('password', 100)->nullable();
+            $table->boolean('is_active')->default(true);
+            $table->string('id_document', 30)->nullable();
+            $table->string('phones', 50)->nullable();
+            $table->string('comments', 250)->nullable();
             $table->timestamps();
 
             $table->index('semester_id');
             $table->index('department_id');
-            $table->unique(['code', 'semester_id']);
+            $table->index('is_active');
+            $table->unique(['name', 'semester_id']);
         });
 
         Schema::enableForeignKeyConstraints();
@@ -42,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('asignatures');
+        Schema::dropIfExists('professors');
     }
 };

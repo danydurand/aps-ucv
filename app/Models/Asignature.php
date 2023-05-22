@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
@@ -22,12 +23,15 @@ class Asignature extends Model
         'code',
         'name',
         'credits',
+        'semester_id',
         'department_id',
         'type',
         'presentation',
         'general_objective',
         'themes',
         'purpose',
+        'info_count',
+        'objectives_count',
     ];
 
     /**
@@ -36,8 +40,9 @@ class Asignature extends Model
      * @var array
      */
     protected $casts = [
-        'id'            => 'integer',
-        'department_id' => 'integer',
+        'id'               => 'integer',
+        'department_id'    => 'integer',
+        'objectives_count' => 'integer',
     ];
 
     const TYPE_OPTIONS = [
@@ -45,18 +50,18 @@ class Asignature extends Model
         'O' => 'OPTATIVA'
     ];
 
+    //---------
+    // Scopes
+    //---------
+    public function scopeFromActiveSemester($query)
+    {
+        $seme = Semester::getActiveOne()->id;
+        return $query->where('semester_id', $seme);
+    }
+
     //-------------
     // Attributes
     //-------------
-    public function getShortNameAttribute()
-    {
-        return Str::substr($this->name,0,20);
-    }
-    public function getInfoCountAttribute()
-    {
-        $pres = Str::length($this->presentation) >= 20 ? 1 : 0;
-    }
-
     public function getTypeNameAttribute()
     {
         return Asignature::TYPE_OPTIONS[$this->type];
@@ -96,6 +101,14 @@ class Asignature extends Model
 
 
 
+    public function professors(): BelongsToMany
+    {
+        return $this->belongsToMany(Professor::class);
+    }
+    public function semester(): BelongsTo
+    {
+        return $this->belongsTo(Semester::class);
+    }
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);

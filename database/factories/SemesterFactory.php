@@ -24,6 +24,7 @@ class SemesterFactory extends Factory
             'name' => $this->faker->name,
             'start_date' => $this->faker->date(),
             'end_date' => $this->faker->date(),
+            'is_active' => $this->faker->boolean,
         ];
     }
 }

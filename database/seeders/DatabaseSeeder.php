@@ -14,12 +14,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             DepartmentSeeder::class,
+            SemesterSeeder::class,
             UserSeeder::class,
             AsignatureSeeder::class,
-            // ObjectiveSeeder::class,
-            // ProfessorSeeder::class,
-            // SemesterSeeder::class,
-            // SectionSeeder::class,
+            ProfessorSeeder::class,
         ]);
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Models\Asignature;
 use App\Models\Objective;
 use App\Models\Planning;
+use App\Models\Professor;
 use App\Models\Semester;
 
 class PlanningFactory extends Factory
@@ -24,14 +25,11 @@ class PlanningFactory extends Factory
     public function definition(): array
     {
         return [
-            'semester_id' => Semester::factory(),
-            'asignature_id' => Asignature::factory(),
-            'objective_id' => Objective::factory(),
-            'start_date' => $this->faker->date(),
-            'end_date' => $this->faker->date(),
-            'evaluation_way' => $this->faker->word,
-            'percentage' => $this->faker->randomFloat(2, 0, 999.99),
-            'points' => $this->faker->randomFloat(2, 0, 999.99),
+            'semester_id'    => Semester::factory(),
+            'asignature_id'  => Asignature::factory(),
+            'professor_id'   => Professor::factory(),
+            'objective_id'   => Objective::factory(),
+            'estimated_date' => $this->faker->date(),
         ];
     }
 }

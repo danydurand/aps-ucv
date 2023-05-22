@@ -13,20 +13,20 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('objectives', function (Blueprint $table) {
+        Schema::create('plannings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('asignature_id')->constrained();
             $table->foreignId('semester_id')->constrained();
-            $table->decimal('order', 4, 2);
-            $table->string('description',100);
-            $table->boolean('is_active')->default(true);
-            $table->text('content')->nullable();
-            $table->text('books')->nullable();
+            $table->foreignId('asignature_id')->constrained();
+            $table->foreignId('professor_id')->constrained();
+            $table->foreignId('objective_id')->constrained();
+            $table->date('estimated_date');
             $table->timestamps();
 
-            $table->index('asignature_id');
             $table->index('semester_id');
-            $table->index('is_active');
+            $table->index('asignature_id');
+            $table->index('professor_id');
+            $table->index('objective_id');
+            $table->unique(['semester_id', 'asignature_id', 'professor_id', 'objective_id']);
         });
 
         Schema::enableForeignKeyConstraints();
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('objectives');
+        Schema::dropIfExists('plannings');
     }
 };
