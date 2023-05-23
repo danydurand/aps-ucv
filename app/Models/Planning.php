@@ -16,9 +16,7 @@ class Planning extends Model
      * @var array
      */
     protected $fillable = [
-        'period_id',
-        'asignature_id',
-        'professor_id',
+        'professor_asignature_id',
         'objective_id',
         'estimated_date',
     ];
@@ -29,27 +27,15 @@ class Planning extends Model
      * @var array
      */
     protected $casts = [
-        'id'             => 'integer',
-        'period_id'      => 'integer',
-        'asignature_id'  => 'integer',
-        'professor_id'   => 'integer',
-        'objective_id'   => 'integer',
-        'estimated_date' => 'date',
+        'id'                      => 'integer',
+        'professor_asignature_id' => 'integer',
+        'objective_id'            => 'integer',
+        'estimated_date'          => 'date',
     ];
 
-    public function period(): BelongsTo
+    public function professor_asignature(): BelongsTo
     {
-        return $this->belongsTo(Period::class);
-    }
-
-    public function asignature(): BelongsTo
-    {
-        return $this->belongsTo(Asignature::class);
-    }
-
-    public function professor(): BelongsTo
-    {
-        return $this->belongsTo(Professor::class);
+        return $this->belongsTo(ProfessorAsignature::class);
     }
 
     public function objective(): BelongsTo

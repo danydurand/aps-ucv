@@ -302,7 +302,11 @@ return [
     |
     */
 
-    'google_fonts' => 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap',
+    // 'google_fonts' => 'https://fonts.googleapis.com/css2?family=DM+Sans&family=Open+Sans:wght@300&family=Roboto:ital,wght@0,100;0,300;1,100&display=swap',
+
+    'google_fonts' => 'https://fonts.googleapis.com/css2?family=DM+Sans&family=Open+Sans:wght@300&family=Roboto:ital,wght@0,100;0,300;1,100&family=Ubuntu:wght@300&display=swap',
+
+    // 'google_fonts' => 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap',
 
     /*
     |--------------------------------------------------------------------------

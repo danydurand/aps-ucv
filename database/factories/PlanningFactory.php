@@ -4,11 +4,9 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Asignature;
 use App\Models\Objective;
 use App\Models\Planning;
-use App\Models\Professor;
-use App\Models\Period;
+use App\Models\ProfessorAsignature;
 
 class PlanningFactory extends Factory
 {
@@ -25,10 +23,8 @@ class PlanningFactory extends Factory
     public function definition(): array
     {
         return [
-            'period_id'      => Period::factory(),
-            'asignature_id'  => Asignature::factory(),
-            'professor_id'   => Professor::factory(),
-            'objective_id'   => Objective::factory(),
+            'professor_asignature_id' => ProfessorAsignature::factory(),
+            'objective_id' => Objective::factory(),
             'estimated_date' => $this->faker->date(),
         ];
     }

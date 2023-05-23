@@ -4,7 +4,10 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PlanningResource\Pages;
 use App\Filament\Resources\PlanningResource\RelationManagers;
+use App\Models\Asignature;
 use App\Models\Planning;
+use App\Models\Professor;
+use App\Models\ProfessorAsignature;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -18,25 +21,23 @@ class PlanningResource extends Resource
     protected static ?string $model = Planning::class;
     protected static ?string $modelLabel = 'Planificacion';
     protected static ?string $pluralLabel = 'Planificacion';
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-list';
-    protected static ?string $navigationGroup = 'gestion';
-    protected static ?int $navigationSort = 4;
+
+    protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                // Forms\Components\Select::make('period_id')
-                //     ->relationship('period', 'name')
-                //     ->required(),
-                Forms\Components\Select::make('asignature_id')
-                    ->relationship('asignature', 'name')
-                    ->required(),
-                Forms\Components\Select::make('professor_id')
-                    ->relationship('professor', 'name')
+                Forms\Components\Select::make('professor_asignature_id')
+                    ->options(function () {
+                        $asig = ProfessorAsignature::select('asignature_id')
+                                                ->where('professor_id',16)
+                                                ->get();
+                        return Asignature::whereIn('id', $asig)->pluck('name', 'id');
+                    })
                     ->required(),
                 Forms\Components\Select::make('objective_id')
-                    ->relationship('objective', 'description')
+                    ->relationship('objective', 'id')
                     ->required(),
                 Forms\Components\DatePicker::make('estimated_date')
                     ->required(),
@@ -47,18 +48,14 @@ class PlanningResource extends Resource
     {
         return $table
             ->columns([
-                // Tables\Columns\TextColumn::make('period.name'),
-                Tables\Columns\TextColumn::make('asignature.name'),
-                Tables\Columns\TextColumn::make('professor.name'),
-                Tables\Columns\TextColumn::make('objective.description'),
+                Tables\Columns\TextColumn::make('professor_asignature.id'),
+                Tables\Columns\TextColumn::make('objective.id'),
                 Tables\Columns\TextColumn::make('estimated_date')
-                    ->date('Y-m-d'),
+                    ->date(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->dateTime('Y-m-d H:i:s'),
+                    ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->dateTime('Y-m-d H:i:s'),
+                    ->dateTime(),
             ])
             ->filters([
                 //

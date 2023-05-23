@@ -32,6 +32,12 @@ class ProfessorAsignature extends Model
         'asignature_id' => 'integer',
     ];
 
+    public function getAsignatureNameAttribute()
+    {
+        return $this->asignature->name;
+    }
+
+
     public function asignature(): BelongsTo
     {
         return $this->belongsTo(Asignature::class);

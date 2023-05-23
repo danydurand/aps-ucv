@@ -36,7 +36,7 @@ class EventServiceProvider extends ServiceProvider
         Period::observe(PeriodObserver::class);
         Objective::observe(ObjectiveObserver::class);
         Asignature::observe(AsignatureObserver::class);
-        Planning::observe(PlanningObserver::class);
+        // Planning::observe(PlanningObserver::class);
     }
 
     /**
