@@ -23,6 +23,7 @@ class Asignature extends Model
         'code',
         'name',
         'credits',
+        'semester',
         'period_id',
         'department_id',
         'type',

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Period extends Model
 {
@@ -38,6 +39,19 @@ class Period extends Model
     public static function getActiveOne()
     {
         return Period::where('is_active', true)->first();
+    }
+
+    //----------------
+    // Relationships
+    //----------------
+    public function professors(): HasMany
+    {
+        return $this->hasMany(Professor::class);
+    }
+
+    public function asignatures(): HasMany
+    {
+        return $this->hasMany(Asignature::class);
     }
 
 

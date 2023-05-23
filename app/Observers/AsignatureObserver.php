@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Asignature;
+use App\Models\Period;
 use Illuminate\Support\Facades\Log;
 
 class AsignatureObserver
@@ -12,6 +13,8 @@ class AsignatureObserver
      */
     public function creating(Asignature $asignature): ?bool
     {
+        $asignature->period_id = Period::getActiveOne()->id;;
+
         $count  = 0;
         $count += !empty($asignature->presentation) ? 1 : 0;
         $count += !empty($asignature->general_objective) ? 1 : 0;

@@ -65,6 +65,16 @@ class PeriodResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->date('Y-m-d'),
+                Tables\Columns\TextColumn::make('professors_count')
+                    ->counts('professors')
+                    ->sortable()
+                    ->label('Profesores')
+                    ->alignCenter(),
+                Tables\Columns\TextColumn::make('asignatures_count')
+                    ->counts('asignatures')
+                    ->sortable()
+                    ->label('Materias')
+                    ->alignCenter(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->label('Activo ?')
                     ->sortable()

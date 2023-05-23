@@ -39,12 +39,13 @@ class AsignatureResource extends Resource
                     ->label('Nombre')
                     ->required()
                     ->maxLength(150)
-                    ->columnSpan(3),
+                    ->columnSpan(2),
                 Forms\Components\TextInput::make('credits')
                     ->label('Creditos')
                     ->required()
                     ->columnSpan(1),
                 Forms\Components\Select::make('semester')
+                    ->label('Semestre')
                     ->options(Asignature::SEMESTER_OPTIONS)
                     ->required(),
                 Forms\Components\Select::make('department_id')
@@ -65,14 +66,7 @@ class AsignatureResource extends Resource
                     ->label('Objectivo General')
                     ->rows(2)
                     ->columnSpan(4),
-                // Forms\Components\Textarea::make('themes')
-                //     ->label('Temas')
-                //     ->rows(2)
-                //     ->columnSpan(4),
-                // Forms\Components\Textarea::make('purpose')
-                //     ->label('Propósito')
-                //     ->rows(2)
-                //     ->columnSpan(4),
+                
             ])
         ]);
     }

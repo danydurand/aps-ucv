@@ -43,13 +43,15 @@ class DepartmentResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('professors_count')
+                    ->counts('professors')
+                    ->sortable()
                     ->label('Profesores')
-                    ->alignCenter()
-                    ->getStateUsing(fn (Model $record) => $record->professors()->count()),
+                    ->alignCenter(),
                 Tables\Columns\TextColumn::make('asignatures_count')
+                    ->counts('asignatures')
+                    ->sortable()
                     ->label('Materias')
-                    ->alignCenter()
-                    ->getStateUsing(fn (Model $record) => $record->asignatures()->count()),
+                    ->alignCenter(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('F. Creacion')
                     ->toggleable(isToggledHiddenByDefault: true)
