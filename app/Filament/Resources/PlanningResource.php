@@ -21,8 +21,9 @@ class PlanningResource extends Resource
     protected static ?string $model = Planning::class;
     protected static ?string $modelLabel = 'Planificacion';
     protected static ?string $pluralLabel = 'Planificacion';
-
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-list';
+    protected static ?string $navigationGroup = 'gestion';
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
@@ -31,7 +32,7 @@ class PlanningResource extends Resource
                 Forms\Components\Select::make('professor_asignature_id')
                     ->options(function () {
                         $asig = ProfessorAsignature::select('asignature_id')
-                                                ->where('professor_id',16)
+                                                ->where('professor_id',auth()->user()->entity_id)
                                                 ->get();
                         return Asignature::whereIn('id', $asig)->pluck('name', 'id');
                     })

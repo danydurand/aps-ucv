@@ -54,8 +54,8 @@ class Professor extends Model
     //---------
     public function scopeFromActivePeriod($query)
     {
-        $seme = Period::getActiveOne()->id;
-        return $query->where('period_id', $seme);
+        $period = Period::getActiveOne()->id;
+        return $query->where('period_id', $period);
     }
 
     //----------------
