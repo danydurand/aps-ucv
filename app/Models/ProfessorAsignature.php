@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProfessorAsignature extends Model
 {
@@ -16,6 +17,7 @@ class ProfessorAsignature extends Model
      * @var array
      */
     protected $fillable = [
+        'period_id',
         'profressor_id',
         'asignature_id',
         'section',
@@ -28,8 +30,13 @@ class ProfessorAsignature extends Model
      */
     protected $casts = [
         'id'            => 'integer',
+        'period_id'     => 'integer',
         'profressor_id' => 'integer',
         'asignature_id' => 'integer',
+    ];
+
+    public $appends = [
+        'asignature_name',
     ];
 
     public function getAsignatureNameAttribute()
@@ -37,6 +44,19 @@ class ProfessorAsignature extends Model
         return $this->asignature->name;
     }
 
+
+    //----------------
+    // Relationships
+    //----------------
+    public function plannings(): HasMany
+    {
+        return $this->hasMany(Planning::class);
+    }
+
+    public function period(): BelongsTo
+    {
+        return $this->belongsTo(Period::class);
+    }
 
     public function asignature(): BelongsTo
     {

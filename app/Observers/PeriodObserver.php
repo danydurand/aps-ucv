@@ -21,7 +21,8 @@ class PeriodObserver
         if (Period::all()->count() > 1) {
             Log::info('Coping last Period data');
             $lastPeriod = Period::latest('id')->get()[1];
-            Log::info('Last Period is: ' . $lastPeriod->name);
+            Log::info('Last Period is: ' . $lastPeriod->name.' (Id:'.$lastPeriod->id.')');
+            Log::info('New Period is: ' . $period->name.' (Id:'.$period->id.')');
             PeriodServices::CopyContentFromLastPeriod($lastPeriod, $period);
         }
     }
@@ -41,6 +42,11 @@ class PeriodObserver
     /**
      * Handle the Period "deleted" event.
      */
+    public function deleting(Period $period): void
+    {
+        PeriodServices::DeleteRelatedData($period);
+    }
+
     public function deleted(Period $period): void
     {
         if ($period->is_active) {

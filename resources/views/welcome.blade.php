@@ -1,3 +1,10 @@
+<?php
+
+header('Location: http://spa.dev.com/admin');
+// or die();
+exit();
+
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>

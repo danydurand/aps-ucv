@@ -15,11 +15,13 @@ return new class extends Migration
 
         Schema::create('professor_asignatures', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('period_id')->constrained();
             $table->foreignId('professor_id')->constrained();
             $table->foreignId('asignature_id')->constrained();
             $table->char('section',5);
             $table->timestamps();
 
+            $table->index('period_id');
             $table->index('professor_id');
             $table->index('asignature_id');
         });

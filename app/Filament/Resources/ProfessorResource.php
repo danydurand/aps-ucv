@@ -9,7 +9,10 @@ use App\Filament\Resources\ProfessorResource\RelationManagers\ProfessorAsignatur
 use App\Models\Asignature;
 use App\Models\Professor;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -30,34 +33,46 @@ class ProfessorResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(50),
-                Forms\Components\Select::make('department_id')
-                    ->relationship('department', 'name')
-                    ->required(),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->maxLength(100),
-                Forms\Components\Toggle::make('is_active')
-                    ->inline(false)
-                    ->required(),
-                Forms\Components\TextInput::make('id_document')
-                    ->unique(ignoreRecord: true)
-                    ->maxLength(30),
-                Forms\Components\TextInput::make('phones')
-                    ->tel()
-                    ->maxLength(50),
+        return $form->schema([
+            Tabs::make('')->schema([
+                Tab::make('Principal')->schema([
+                    Forms\Components\TextInput::make('name')
+                        ->required()
+                        ->maxLength(50),
+                    Forms\Components\Select::make('department_id')
+                        ->relationship('department', 'name')
+                        ->required(),
+                    Forms\Components\TextInput::make('email')
+                        ->email()
+                        ->maxLength(100),
+                ])->columns(3),
+                Tab::make('Secundaria')->schema([
+                    Grid::make(5)->schema([
+                        Forms\Components\Toggle::make('is_active')
+                            ->inline(false)
+                            ->required()
+                            ->columnSpan(1),
+                        Forms\Components\TextInput::make('id_document')
+                            ->unique(ignoreRecord: true)
+                            ->maxLength(30)
+                            ->columnSpan(2),
+                        Forms\Components\TextInput::make('phones')
+                            ->tel()
+                            ->maxLength(50)
+                            ->columnSpan(2),
+                    ]),
+                    Grid::make()->schema([
+                        Forms\Components\TextInput::make('comments')
+                            ->columnSpan(3)
+                            ->maxLength(250),
+                    ])
+                ]),
+            ])->columnSpanFull(),
                 // Select::make('asignatures')
                 //     ->columnSpan(3)
                 //     ->multiple()
                 //     ->relationship('asignatures', 'name'),
-                Forms\Components\TextInput::make('comments')
-                    ->columnSpan(3)
-                    ->maxLength(250),
-            ])->columns(3);
+        ]);
     }
 
     public static function table(Table $table): Table

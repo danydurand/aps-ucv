@@ -13,6 +13,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -49,14 +50,18 @@ class PlanningResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('professor_asignature.id'),
-                Tables\Columns\TextColumn::make('objective.id'),
-                Tables\Columns\TextColumn::make('estimated_date')
-                    ->date(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                TextColumn::make('asignature.name')
+                    ->label('Materia'),
+                TextColumn::make('section')
+                    ->label('Section')
+                // Tables\Columns\TextColumn::make('professor_asignature.id'),
+                // Tables\Columns\TextColumn::make('objective.id'),
+                // Tables\Columns\TextColumn::make('estimated_date')
+                //     ->date(),
+                // Tables\Columns\TextColumn::make('created_at')
+                //     ->dateTime(),
+                // Tables\Columns\TextColumn::make('updated_at')
+                //     ->dateTime(),
             ])
             ->filters([
                 //
@@ -67,6 +72,12 @@ class PlanningResource extends Resource
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return ProfessorAsignature::with('asignature')
+            ->where('professor_id',auth()->user()->entity_id);
     }
 
     public static function getRelations(): array

@@ -8,6 +8,8 @@ use App\Filament\Resources\AsignatureResource\RelationManagers\ObjectivesRelatio
 use App\Models\Asignature;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -28,46 +30,53 @@ class AsignatureResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Grid::make(4)
-                ->schema([
-                Forms\Components\TextInput::make('code')
-                    ->label('Codigo')
-                    ->required()
-                    ->maxLength(10)
-                    ->columnSpan(1),
-                Forms\Components\TextInput::make('name')
-                    ->label('Nombre')
-                    ->required()
-                    ->maxLength(150)
-                    ->columnSpan(2),
-                Forms\Components\TextInput::make('credits')
-                    ->label('Creditos')
-                    ->required()
-                    ->columnSpan(1),
-                Forms\Components\Select::make('semester')
-                    ->label('Semestre')
-                    ->options(Asignature::SEMESTER_OPTIONS)
-                    ->required(),
-                Forms\Components\Select::make('department_id')
-                    ->label('Departamento')
-                    ->relationship('department', 'name')
-                    ->required()
-                    ->columnSpan(2),
-                Forms\Components\Select::make('type')
-                    ->label('Tipo')
-                    ->options(Asignature::TYPE_OPTIONS)
-                    ->required()
-                    ->columnSpan(1),
-                Forms\Components\Textarea::make('presentation')
-                    ->label('Presentacion')
-                    ->rows(2)
-                    ->columnSpan(4),
-                Forms\Components\Textarea::make('general_objective')
-                    ->label('Objectivo General')
-                    ->rows(2)
-                    ->columnSpan(4),
-                
-            ])
+            Tabs::make('')->schema([
+                Tab::make('Principal')->schema([
+                    Grid::make(4)
+                        ->schema([
+                        Forms\Components\TextInput::make('code')
+                            ->label('Codigo')
+                            ->required()
+                            ->maxLength(10)
+                            ->columnSpan(1),
+                        Forms\Components\TextInput::make('name')
+                            ->label('Nombre')
+                            ->required()
+                            ->maxLength(150)
+                            ->columnSpan(2),
+                        Forms\Components\TextInput::make('credits')
+                            ->label('Creditos')
+                            ->required()
+                            ->columnSpan(1),
+                        Forms\Components\Select::make('semester')
+                            ->label('Semestre')
+                            ->options(Asignature::SEMESTER_OPTIONS)
+                            ->required(),
+                        Forms\Components\Select::make('department_id')
+                            ->label('Departamento')
+                            ->relationship('department', 'name')
+                            ->required()
+                            ->columnSpan(2),
+                        Forms\Components\Select::make('type')
+                            ->label('Tipo')
+                            ->options(Asignature::TYPE_OPTIONS)
+                            ->required()
+                            ->columnSpan(1),
+                    ])
+                ]),
+                Tab::make('Secundaria')->schema([
+                    Grid::make()->schema([
+                        Forms\Components\Textarea::make('presentation')
+                            ->label('Presentacion')
+                            ->rows(2)
+                            ->columnSpan(4),
+                        Forms\Components\Textarea::make('general_objective')
+                            ->label('Objectivo General')
+                            ->rows(2)
+                            ->columnSpan(4),
+                    ])
+                ])
+            ])->columnSpanFull()
         ]);
     }
 
@@ -105,6 +114,7 @@ class AsignatureResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('credits')
+                    ->alignCenter()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable()
                     ->searchable(),

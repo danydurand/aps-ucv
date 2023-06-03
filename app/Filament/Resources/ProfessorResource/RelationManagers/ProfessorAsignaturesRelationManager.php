@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\ProfessorResource\RelationManagers;
 
+use App\Models\Asignature;
+use App\Models\Period;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -26,7 +28,12 @@ class ProfessorAsignaturesRelationManager extends RelationManager
                     ->label('Materia')
                     ->columnSpan(2)
                     ->required()
-                    ->relationship('asignature', 'name'),
+                    ->options(function () {
+                        $perid_id = Period::getActiveOne()->id;
+                        return Asignature::where('period_id',$perid_id)
+                            ->orderBy('name', 'asc')
+                            ->pluck('name', 'id');
+                    }),
                 Forms\Components\TextInput::make('section')
                     ->label('Seccion')
                     ->required()
@@ -48,7 +55,13 @@ class ProfessorAsignaturesRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->mutateFormDataUsing(function (array $data): array {
+                        // $data['user_id'] = auth()->id();
+                        $data['period_id'] = Period::getActiveOne()->id;
+
+                        return $data;
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
