@@ -48,6 +48,11 @@ class ProfessorAsignature extends Model
     //----------------
     // Relationships
     //----------------
+    public function evaluations(): HasMany
+    {
+        return $this->hasMany(Evaluation::class);
+    }
+
     public function plannings(): HasMany
     {
         return $this->hasMany(Planning::class);

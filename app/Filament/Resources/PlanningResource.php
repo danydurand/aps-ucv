@@ -25,6 +25,8 @@ class PlanningResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-list';
     protected static ?string $navigationGroup = 'gestion';
     protected static ?int $navigationSort = 5;
+    protected static bool $shouldRegisterNavigation = false;
+
 
     public static function form(Form $form): Form
     {

@@ -13,6 +13,8 @@ use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -46,31 +48,59 @@ class MyAsignaturesResource extends Resource
                 Forms\Components\TextInput::make('section')
                     ->label('Seccion')
                     ->disabled(),
-                Forms\Components\Repeater::make('plannings')
-                    ->label('Planificacion')
-                    ->relationship()
-                    ->defaultItems(1)
-                    ->columnSpan('full')
-                    ->schema([
-                        Forms\Components\DatePicker::make('estimated_date')
-                            ->label('Fecha Estimada')
-                            ->columnSpan(1)
-                            ->required(),
-                        Forms\Components\Select::make('objective_id')
-                            ->label('Objetivo')
-                            ->required()
-                            ->columnSpan(3)
-                            ->options(function () {
-                                $asignature_id = Session::get('materia');
-                                Log::info('Materia: '.$asignature_id);
-                                Log::info('Professor: '.auth()->user()->entity_id);
-                                $period_id = Period::getActiveOne()->id;
-                                Log::info('Periodo: '.$period_id);
-                                return Objective::where('asignature_id', $asignature_id)
-                                                ->where('period_id', $period_id)
-                                                ->pluck('description', 'id');
-                            }),
-                    ])->columns(4)
+                Tabs::make('')->schema([
+                    Tab::make('Planificacion')->schema([
+                        Forms\Components\Repeater::make('plannings')
+                            ->label('Planificacion')
+                            ->relationship()
+                            ->defaultItems(1)
+                            ->columnSpan('full')
+                            ->schema([
+                                Forms\Components\DatePicker::make('estimated_date')
+                                    ->label('Fecha Estimada')
+                                    ->columnSpan(1)
+                                    ->required(),
+                                Forms\Components\Select::make('objective_id')
+                                    ->label('Objetivo')
+                                    ->required()
+                                    ->columnSpan(3)
+                                    ->options(function () {
+                                        $asignature_id = Session::get('materia');
+                                        $period_id = Period::getActiveOne()->id;
+                                        return Objective::where('asignature_id', $asignature_id)
+                                                        ->where('period_id', $period_id)
+                                                        ->pluck('description', 'id');
+                                    }),
+                            ])->columns(4)
+                    ]),
+                    Tab::make('Evaluacion')->schema([
+                        Forms\Components\Repeater::make('evaluations')
+                            ->label('Evaluaciones')
+                            ->relationship()
+                            ->defaultItems(1)
+                            ->columnSpan('full')
+                            ->schema([
+                                Forms\Components\TextInput::make('objectives')
+                                    ->label('Objetivos')
+                                    ->placeholder('Ej: 1,2')
+                                    ->columnSpan(1)
+                                    ->required(),
+                                Forms\Components\TextInput::make('evaluation_way')
+                                    ->label('Forma de Evaluacion')
+                                    ->placeholder('Ej: Examen oral, Prueba escrita, etc.')
+                                    ->columnSpan(1)
+                                    ->required(),
+                                Forms\Components\TextInput::make('percentage')
+                                    ->label('Porcentage')
+                                    ->placeholder('Ej: 20%')
+                                    ->columnSpan(1),
+                                Forms\Components\TextInput::make('points')
+                                    ->label('Puntos')
+                                    ->placeholder('Ej: 10')
+                                    ->columnSpan(1),
+                            ])->columns(4)
+                    ])
+                ])->columnSpanFull()
             ]);
     }
 
