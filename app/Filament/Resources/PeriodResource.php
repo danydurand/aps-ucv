@@ -6,6 +6,9 @@ use App\Filament\Resources\PeriodResource\Pages;
 use App\Filament\Resources\PeriodResource\RelationManagers;
 use App\Models\Period;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -24,27 +27,57 @@ class PeriodResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label('Nombre')
-                    ->required()
-                    ->maxLength(30),
-                Forms\Components\DatePicker::make('start_date')
-                    ->label('F. Inicio')
-                    ->required(),
-                Forms\Components\DatePicker::make('end_date')
-                    ->label('F. Final')
-                    ->required(),
-                Forms\Components\Toggle::make('is_active')
-                    ->label('Activo ?')
-                    ->inline(false)
-                    ->required(),
-                Forms\Components\Toggle::make('is_closed')
-                    ->label('Cerrado ?')
-                    ->inline(false)
-                    ->required(),
-            ])->columns(5);
+        return $form->schema([
+            Tabs::make('')->schema([
+                Tab::make('Principal')->schema([
+                    Grid::make(6)->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label('Nombre')
+                            ->required()
+                            ->maxLength(30),
+                        Forms\Components\DatePicker::make('start_date')
+                            ->label('F. Inicio')
+                            ->required(),
+                        Forms\Components\DatePicker::make('end_date')
+                            ->label('F. Final')
+                            ->required(),
+                        Forms\Components\DatePicker::make('delivery_notes_limit')
+                            ->label('Limit Entr. Notas')
+                            ->required(),
+                        Forms\Components\Toggle::make('is_active')
+                            ->label('Activo ?')
+                            ->inline(false)
+                            ->required(),
+                        Forms\Components\Toggle::make('is_closed')
+                            ->label('Cerrado ?')
+                            ->inline(false)
+                            ->required(),
+                    ])
+                ]),
+                Tab::make('Vacaciones y Feridados')->schema([
+                    Forms\Components\Repeater::make('vacations')
+                        ->label('Vacaciones y Feriados')
+                        ->relationship()
+                        ->defaultItems(1)
+                        ->columnSpan('full')
+                        ->schema([
+                            Grid::make(3)->schema([
+                                Forms\Components\TextInput::make('name')
+                                    ->label('Nombre')
+                                    ->placeholder('Ej: Semana Sta, Carnval, etc.')
+                                    ->required()
+                                    ->maxLength(50),
+                                Forms\Components\DatePicker::make('start_date')
+                                    ->label('F. Inicio')
+                                    ->required(),
+                                Forms\Components\DatePicker::make('end_date')
+                                    ->label('F. Final')
+                                    ->required(),
+                            ])
+                    ]),
+                ]),
+            ])->columnSpanFull()
+        ]);
     }
 
     public static function table(Table $table): Table
@@ -57,6 +90,11 @@ class PeriodResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('start_date')
                     ->label('F. Inicio')
+                    ->searchable()
+                    ->sortable()
+                    ->date('Y-m-d'),
+                Tables\Columns\TextColumn::make('delivery_notes_limit')
+                    ->label('Limit Entr. Notas')
                     ->searchable()
                     ->sortable()
                     ->date('Y-m-d'),
@@ -82,6 +120,7 @@ class PeriodResource extends Resource
                     ->boolean(),
                 Tables\Columns\IconColumn::make('is_closed')
                     ->label('Cerrado ?')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable()
                     ->alignCenter()
                     ->boolean(),

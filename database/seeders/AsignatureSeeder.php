@@ -228,6 +228,15 @@ class AsignatureSeeder extends Seeder
             'type'          => 'OBLIGATORIA',
         ]);
         Asignature::create([
+            'code'          => '9220',
+            'name'          => 'ANALISIS DEMOGRAFICO',
+            'credits'       => 5,
+            'semester'      => 'SEXTO',
+            'period_id'     => $period,
+            'department_id' => $estu,
+            'type'          => 'OBLIGATORIA',
+        ]);
+        Asignature::create([
             'code'          => '9111',
             'name'          => 'OPTATIVA I',
             'credits'       => 4,

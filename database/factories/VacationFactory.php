@@ -5,15 +5,16 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Period;
+use App\Models\Vacation;
 
-class PeriodFactory extends Factory
+class VacationFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Period::class;
+    protected $model = Vacation::class;
 
     /**
      * Define the model's default state.
@@ -21,11 +22,10 @@ class PeriodFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'                 => $this->faker->name,
-            'start_date'           => $this->faker->date(),
-            'end_date'             => $this->faker->date(),
-            'delivery_notes_limit' => $this->faker->date(),
-            'is_active'            => $this->faker->boolean,
+            'period_id' => Period::factory(),
+            'name' => $this->faker->name,
+            'start_date' => $this->faker->date(),
+            'end_date' => $this->faker->date(),
         ];
     }
 }

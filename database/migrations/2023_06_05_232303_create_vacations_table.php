@@ -11,16 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('periods', function (Blueprint $table) {
+        Schema::disableForeignKeyConstraints();
+
+        Schema::create('vacations', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 30)->unique();
+            $table->foreignId('period_id')->constrained();
+            $table->string('name', 100);
             $table->date('start_date');
             $table->date('end_date');
-            $table->date('delivery_notes_limit');
-            $table->boolean('is_active')->default(true);
-            $table->boolean('is_closed')->default(false);
             $table->timestamps();
+
+            $table->index('period_id');
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('periods');
+        Schema::dropIfExists('vacations');
     }
 };

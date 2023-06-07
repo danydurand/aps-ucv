@@ -49,9 +49,9 @@ class MyAsignaturesResource extends Resource
                     ->label('Seccion')
                     ->disabled(),
                 Tabs::make('')->schema([
-                    Tab::make('Planificacion')->schema([
+                    Tab::make('Planificación Académica')->schema([
                         Forms\Components\Repeater::make('plannings')
-                            ->label('Planificacion')
+                            ->label('Planificación')
                             ->relationship()
                             ->defaultItems(1)
                             ->columnSpan('full')
@@ -73,7 +73,7 @@ class MyAsignaturesResource extends Resource
                                     }),
                             ])->columns(4)
                     ]),
-                    Tab::make('Evaluacion')->schema([
+                    Tab::make('Plan de Evaluacion')->schema([
                         Forms\Components\Repeater::make('evaluations')
                             ->label('Evaluaciones')
                             ->relationship()
@@ -116,6 +116,10 @@ class MyAsignaturesResource extends Resource
                 TextColumn::make('plannings_count')
                     ->counts('plannings')
                     ->label('Planif')
+                    ->alignCenter(),
+                TextColumn::make('evaluations_count')
+                    ->counts('evaluations')
+                    ->label('Evaluaciones')
                     ->alignCenter()
             ])
             ->filters([

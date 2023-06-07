@@ -19,6 +19,7 @@ class Period extends Model
         'name',
         'start_date',
         'end_date',
+        'delivery_notes_limit',
         'is_active',
         'is_closed',
     ];
@@ -29,11 +30,12 @@ class Period extends Model
      * @var array
      */
     protected $casts = [
-        'id'         => 'integer',
-        'start_date' => 'date',
-        'end_date'   => 'date',
-        'is_active'  => 'boolean',
-        'is_closed'  => 'boolean',
+        'id'                   => 'integer',
+        'start_date'           => 'date',
+        'end_date'             => 'date',
+        'delivery_notes_limit' => 'date',
+        'is_active'            => 'boolean',
+        'is_closed'            => 'boolean',
     ];
 
     public static function getActiveOne()
@@ -44,6 +46,11 @@ class Period extends Model
     //----------------
     // Relationships
     //----------------
+    public function vacations(): HasMany
+    {
+        return $this->hasMany(Vacation::class);
+    }
+
     public function professors(): HasMany
     {
         return $this->hasMany(Professor::class);
